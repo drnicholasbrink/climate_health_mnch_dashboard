@@ -218,7 +218,6 @@ h2.subtitle {
     font-weight: 500;
     color: var(--text-tertiary);
     margin: 0 0 var(--spacing-sm) 0;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
@@ -289,6 +288,8 @@ h2.subtitle {
     border-radius: var(--radius-md) !important;
     border: 1px solid var(--separator) !important;
     box-shadow: var(--shadow-lg) !important;
+    max-height: 420px !important; /* show more options */
+    overflow-y: auto !important;
 }
 
 /* Slider Styling */
@@ -415,4 +416,193 @@ h2.subtitle {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-tertiary);
+}
+
+/* --- New: Page Grid with Sidebar --- */
+.page {
+    display: grid;
+    grid-template-columns: 400px 1fr; /* widened left panel */
+    gap: var(--spacing-xl);
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+}
+
+.sidebar {
+    background: var(--background-primary);
+    border: 1px solid var(--separator);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    position: sticky;
+    top: var(--spacing-lg);
+    height: calc(100vh - 2 * var(--spacing-lg));
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+    transition: width 0.25s ease-in-out, padding 0.25s ease-in-out;
+}
+
+.sidebar.expanded { width: 400px; } /* widened */
+.sidebar.collapsed { width: 84px; padding-left: 12px; padding-right: 12px; }
+
+.sidebar .section-title { text-align: left; }
+
+.sidebar .input-box { padding: var(--spacing-md); }
+.sidebar .input-box h3 { font-size: 0.95rem; margin-bottom: var(--spacing-sm); }
+
+.sidebar .slider-box { padding: var(--spacing-md); }
+.sidebar .slider-box h3 { font-size: 0.95rem; }
+
+.sidebar-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--separator);
+    background: var(--background-secondary);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.sidebar.collapsed .hide-when-collapsed { display: none; }
+
+.main {
+    min-width: 0;
+}
+
+.main.full { grid-column: span 2; }
+
+/* --- Featured Indicators --- */
+.featured-indicators {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.indicator-card {
+    background: linear-gradient(135deg, var(--background-secondary) 0%, #FAFAFA 100%);
+    border: 1px solid var(--separator);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.indicator-card h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.indicator-card .value {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Color accents for featured indicator cards */
+.featured-indicators .indicator-card:nth-child(1) { /* Additional Cases */
+    --accent: var(--primary-blue);
+    background: linear-gradient(180deg, rgba(0,122,255,0.08) 0%, rgba(0,0,0,0) 100%);
+    border-color: rgba(0,122,255,0.25);
+    box-shadow: var(--shadow-md), inset 0 3px 0 var(--accent);
+}
+.featured-indicators .indicator-card:nth-child(1) .value { color: #0A84FF; }
+
+.featured-indicators .indicator-card:nth-child(2) { /* Total Cost */
+    --accent: var(--green);
+    background: linear-gradient(180deg, rgba(48,209,88,0.08) 0%, rgba(0,0,0,0) 100%);
+    border-color: rgba(48,209,88,0.25);
+    box-shadow: var(--shadow-md), inset 0 3px 0 var(--accent);
+}
+.featured-indicators .indicator-card:nth-child(2) .value { color: #34C759; }
+
+.featured-indicators .indicator-card:nth-child(3) { /* Mitigation Savings */
+    --accent: var(--orange);
+    background: linear-gradient(180deg, rgba(255,149,0,0.08) 0%, rgba(0,0,0,0) 100%);
+    border-color: rgba(255,149,0,0.25);
+    box-shadow: var(--shadow-md), inset 0 3px 0 var(--accent);
+}
+.featured-indicators .indicator-card:nth-child(3) .value { color: #FF9F0A; }
+
+.featured-indicators .indicator-card:nth-child(4) { /* Adaptation Savings */
+    --accent: var(--purple);
+    background: linear-gradient(180deg, rgba(175,82,222,0.08) 0%, rgba(0,0,0,0) 100%);
+    border-color: rgba(175,82,222,0.25);
+    box-shadow: var(--shadow-md), inset 0 3px 0 var(--accent);
+}
+.featured-indicators .indicator-card:nth-child(4) .value { color: #BF5AF2; }
+
+/* Secondary indicators compact grid */
+.secondary-indicators {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.secondary-indicators .key-indicator { padding: var(--spacing-md); }
+.secondary-indicators .key-indicator h2 { font-size: 0.75rem; }
+.secondary-indicators .key-indicator p { font-size: 1rem; }
+
+/* Graph sizes to fit one screen comfortably */
+.graph-container {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+}
+
+.graph-container .dash-graph, .graph-container > div {
+    height: 360px;
+}
+
+/* Export button alignment */
+.export-section { text-align: right; }
+
+/* helper text styles */
+.helper-text { 
+    font-size: 12px; 
+    color: var(--text-tertiary);
+    margin-top: 6px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1200px) {
+    .page { grid-template-columns: 360px 1fr; } /* keep sidebar comfortable on medium screens */
+    .featured-indicators { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+    .page { display: block; padding: var(--spacing-lg); }
+    .sidebar { position: relative; height: auto; width: 100% !important; margin-bottom: var(--spacing-xl); }
+    .main.full { grid-column: auto; }
+    .graph-container { grid-template-columns: 1fr; }
+}
+
+/* --- Text overflow & wrapping improvements --- */
+/* Allow long labels/values to wrap in inputs and dropdowns */
+.input-box h3, .section-title {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.dropdown .Select-control, .dropdown .Select-menu-outer, .dropdown .Select-value, .dropdown .Select-value-label, .dropdown .Select-option {
+    white-space: normal !important;
+}
+
+.dropdown .Select-value-label {
+    line-height: 1.3 !important;
+}
+
+/* Ensure indicator values don’t overflow */
+.indicator-card .value, .key-indicator p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Slightly smaller slider mark text to avoid collisions */
+.rc-slider-mark-text {
+    font-size: 11px !important;
 }
