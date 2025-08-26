@@ -1,107 +1,418 @@
+/* Apple-inspired Design System */
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@300;400;500;600&display=swap');
+
+:root {
+    /* Apple Color Palette */
+    --primary-blue: #007AFF;
+    --primary-blue-dark: #0056CC;
+    --background-primary: #FFFFFF;
+    --background-secondary: #F2F2F7;
+    --background-tertiary: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #3C3C43;
+    --text-tertiary: #8E8E93;
+    --separator: #C6C6C8;
+    --green: #30D158;
+    --red: #FF3B30;
+    --orange: #FF9500;
+    --yellow: #FFCC00;
+    --purple: #AF52DE;
+    --pink: #FF2D92;
+    --indigo: #5856D6;
+    --teal: #32D74B;
+    
+    /* Spacing System */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #e8ebef;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #F2F2F7 0%, #E5E5EA 100%);
     margin: 0;
     padding: 0;
+    line-height: 1.5;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* Header Section */
+.header-section {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #5856D6 100%);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='6' cy='6' r='6'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
 }
 
 h1 {
-    text-align: center;
-    padding: 10px;
-    color: #333;
-    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
 }
 
 h2.subtitle {
-    text-align: center;
-    padding: 10px;
-    color: #666;
-    font-weight: normal;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin: var(--spacing-md) 0 0 0;
+    position: relative;
+    z-index: 1;
 }
 
+/* Main Container */
 .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-2xl) var(--spacing-lg);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    gap: var(--spacing-2xl);
+}
+
+/* Input Section */
+.input-section {
+    background: var(--background-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--separator);
+}
+
+.section-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-xl) 0;
+    text-align: center;
 }
 
 .input-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
 }
 
 .input-box {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    flex: 1 1 45%;
-    min-width: 300px;
+    background: var(--background-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--separator);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-box:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.input-box h3 {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+/* Slider Section */
+.slider-section {
+    background: var(--background-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--separator);
 }
 
 .slider-box {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    width: 95%;
+    background: var(--background-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-lg) 0;
+    border: 1px solid var(--separator);
+}
+
+.slider-box h3 {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--spacing-lg) 0;
+    text-align: center;
+}
+
+/* Key Indicators */
+.outputs-section {
+    background: var(--background-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--separator);
 }
 
 .key-indicators {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
 }
 
 .key-indicator {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
+    background: linear-gradient(135deg, var(--background-secondary) 0%, #FAFAFA 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
     text-align: center;
-    flex: 1 1 30%;
-    min-width: 150px;
+    border: 1px solid var(--separator);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.key-indicator:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
 }
 
 .key-indicator h2 {
-    margin-bottom: 10px;
-    color: #333;
-    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin: 0 0 var(--spacing-sm) 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .key-indicator p {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
     margin: 0;
-    font-size: 16px;
-    color: #555;
+    word-break: break-word;
+}
+
+/* Graphs Section */
+.graphs-section {
+    background: var(--background-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--separator);
 }
 
 .graph-container {
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
 }
 
-input, .dropdown, .slider {
-    margin: 10px 0;
+.graph-container > div {
+    background: var(--background-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    border: 1px solid var(--separator);
+}
+
+/* Form Controls */
+.input, .dropdown select, input[type="number"] {
     width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--separator);
+    border-radius: var(--radius-md);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 1rem;
+    background: var(--background-primary);
+    color: var(--text-primary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus, .dropdown select:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* Dropdown Styling */
+.Select-control {
+    border: 1px solid var(--separator) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--background-primary) !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
+}
+
+.Select-control:hover {
+    border-color: var(--primary-blue) !important;
+}
+
+.Select-menu-outer {
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--separator) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Slider Styling */
+.rc-slider {
+    margin: var(--spacing-lg) 0 !important;
+}
+
+.rc-slider-rail {
+    background-color: var(--separator) !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+}
+
+.rc-slider-track {
+    background: linear-gradient(90deg, var(--primary-blue) 0%, var(--indigo) 100%) !important;
+    height: 6px !important;
+    border-radius: 3px !important;
+}
+
+.rc-slider-handle {
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid var(--primary-blue) !important;
+    background: var(--background-primary) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.rc-slider-handle:hover {
+    border-color: var(--primary-blue-dark) !important;
+}
+
+/* Export Button */
+.export-section {
+    text-align: center;
+    margin: var(--spacing-2xl) 0;
 }
 
 .button {
-    margin: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--indigo) 100%);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-md);
 }
 
 .button:hover {
-    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+/* Checkbox Styling */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: var(--spacing-sm);
+}
+
+._dash-undo-redo {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+    
+    .input-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .graph-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .key-indicators {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: var(--spacing-md);
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Smooth Animations */
+* {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--separator);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
 }
